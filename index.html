@@ -29,7 +29,7 @@
 <body>
   <header class="site-header">
     <div class="header-content">
-      <img src="Content/Logo Dodi Innovatis.svg" alt="Dodi Innovatis Logo" class="logo" />
+      <img src="Content/Logo Dodi Innovatis.svg" alt="Dodi Innovatis Logo" class="logo" loading="lazy" />
       <div class="header-right">
         <!-- <div class="search-container">
           <input type="text" id="searchInput" placeholder="Caută..." class="search-input">
@@ -47,8 +47,8 @@
           <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="header-buttons">
-          <button class="devis-btn" id="openDevisModal">Demander un Devis</button>
-          <a href="#" class="contact-btn" id="openContactModal">Contact</a>
+          <button type="button" class="btn devis-btn" id="openDevisModal">Demander un Devis</button>
+          <button type="button" class="btn contact-btn" id="openContactModal">Contact</button>
         </div>
 
         <!-- Contact Modal -->
@@ -894,9 +894,30 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
-  <script src="js/contact-modal.js"></script>
-  <script src="js/devis-modal.js"></script>
+  <!-- Script-uri cu defer pentru a nu bloca randarea paginii -->
+  <script src="script.js" defer></script>
+  <script src="js/contact-modal.js" defer></script>
+  <script src="js/devis-modal.js" defer></script>
+  
+  <!-- Preload pentru font-uri critice -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Loader pentru prima încărcare -->
+  <div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;justify-content:center;align-items:center;transition:opacity 0.3s ease-out;">
+    <div style="width:50px;height:50px;border:5px solid #f3f3f3;border-top:5px solid #3498db;border-radius:50%;animation:spin 1s linear infinite"></div>
+  </div>
+  <script>
+    window.addEventListener('load', function() {
+      var loader = document.getElementById('loader');
+      loader.style.opacity = '0';
+      setTimeout(function() {
+        loader.style.display = 'none';
+      }, 300);
+    });
+  </script>
+  <style>
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
 </body>
 
 </html>
