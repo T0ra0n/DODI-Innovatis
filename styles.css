@@ -1082,12 +1082,6 @@ img {
   }
 }
 
-position: relative;
-display: flex;
-flex-direction: column;
-overflow-y: auto;
-/* Permite derularea conținutului */
-}
 
 .company-details {
   flex: 1;

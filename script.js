@@ -1,9 +1,36 @@
+// Preload images for better performance
+const preloadImages = () => {
+    const projectImages = document.querySelectorAll('.project-image[data-src]');
+    const preloaded = new Set();
+
+    projectImages.forEach(img => {
+        const src = img.getAttribute('data-src');
+        if (src && !preloaded.has(src)) {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = src;
+            document.head.appendChild(link);
+            preloaded.add(src);
+        }
+    });
+};
+
+// Start preloading as soon as possible
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', preloadImages);
+} else {
+    preloadImages();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Adăugăm animație la încărcarea inițială a paginii
 const initialTabContent = document.querySelector('.tab-content:not([style*="display: none"])');
 if (initialTabContent) {
     initialTabContent.classList.add('fade-in-up');
 }
+    // Preload images (in case DOMContentLoaded fires before all images are found)
+    preloadImages();
     // Funcționalitate de căutare
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.querySelector('.search-btn');
