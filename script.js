@@ -1,3 +1,63 @@
+// Funcție pentru a preîncărca toate imaginile
+function preloadAllImages() {
+  return new Promise((resolve) => {
+    const images = document.querySelectorAll('img[src]');
+    let loaded = 0;
+    
+    if (images.length === 0) {
+      resolve();
+      return;
+    }
+
+    const imageLoadHandler = () => {
+      loaded++;
+      if (loaded === images.length) {
+        resolve();
+      }
+    };
+
+    images.forEach(img => {
+      if (img.complete) {
+        loaded++;
+      } else {
+        img.addEventListener('load', imageLoadHandler);
+        img.addEventListener('error', imageLoadHandler);
+      }
+    });
+
+    // Verificăm din nou în cazul în care toate imaginile s-au încărcat între timp
+    if (loaded === images.length) {
+      resolve();
+    }
+  });
+}
+
+// Ascundem conținutul principal până când toate imaginile sunt încărcate
+const mainContent = document.querySelector('main, .main-container');
+if (mainContent) {
+  mainContent.style.visibility = 'hidden';
+}
+
+// Așteptăm încărcarea tuturor resurselor
+window.addEventListener('load', function() {
+  // Așteptăm încărcarea tuturor imaginilor
+  preloadAllImages().then(() => {
+    // Ascundem loader-ul după o mică întârziere pentru un efect mai plăcut
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.style.display = 'none';
+          if (mainContent) {
+            mainContent.style.visibility = 'visible';
+          }
+        }, 300);
+      }
+    }, 500);
+  });
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     // Funcționalitate de căutare
     const searchInput = document.getElementById('searchInput');
