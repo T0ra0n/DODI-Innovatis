@@ -56,8 +56,8 @@
           <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2>Contactez-nous</h2>
-            
-           
+
+
             <form id="contactForm" class="contact-form">
               <h3>Envoyez-nous un message</h3>
               <div class="form-group required">
@@ -82,6 +82,125 @@
                 <div class="file-info"></div>
               </div>
               <button type="submit" class="submit-btn">Envoyer le message</button>
+            </form>
+          </div>
+        </div>
+        <!-- Devis Modal -->
+        <div id="devisModal" class="modal">
+          <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Demander un Devis</h2>
+
+            <form id="devisForm" class="contact-form">
+              <h3>Demande de devis personnalisé</h3>
+
+              <!-- Service Selection -->
+              <div class="form-group required">
+                <label for="serviceType">Type de service <span class="required-asterisk">*</span></label>
+                <select id="serviceType" name="serviceType" required>
+                  <option value="" disabled selected>Sélectionnez un service</option>
+                  <option value="renovare">RENOVARE INTERIOARĂ & EXTERIOARĂ</option>
+                  <option value="instalatii">INSTALAȚII ELECTRICE & SANITARE</option>
+                  <option value="montaj">MONTAJ GRESIE, FAIANȚĂ, PARCHET</option>
+                  <option value="finisaje">FINISAJE & ZUGĂRĂVELI</option>
+                  <option value="altul">Alt serviciu</option>
+                </select>
+              </div>
+
+              <!-- Project Type -->
+              <div class="form-group required">
+                <label for="projectType">Type de projet <span class="required-asterisk">*</span></label>
+                <select id="projectType" name="projectType" required>
+                  <option value="" disabled selected>Sélectionnez le type de projet</option>
+                  <option value="residential">Résidentiel (maison, appartement)</option>
+                  <option value="commercial">Commercial (bureau, magasin, restaurant)</option>
+                  <option value="industrial">Industriel (halls, entrepôts)</option>
+                  <option value="other">Autre</option>
+                </select>
+              </div>
+
+              <!-- Project Size -->
+              <div class="form-group">
+                <label for="projectSize">Superficie du projet (m²)</label>
+                <input type="number" id="projectSize" name="projectSize" min="1" placeholder="Ex: 75">
+              </div>
+
+              <!-- Timeline -->
+              <div class="form-group">
+                <label for="timeline">Délai de réalisation souhaité</label>
+                <select id="timeline" name="timeline">
+                  <option value="">Sélectionnez une période</option>
+                  <option value="urgent">Moins d'un mois</option>
+                  <option value="1-3">1-3 mois</option>
+                  <option value="3-6">3-6 mois</option>
+                  <option value="6+">Plus de 6 mois</option>
+                  <option value="flexible">Je suis flexible</option>
+                </select>
+              </div>
+
+              <!-- Start Date -->
+              <div class="form-group">
+                <label for="startDate">Période de démarrage souhaitée</label>
+                <select id="startDate" name="startDate">
+                  <option value="">Quand souhaitez-vous commencer ?</option>
+                  <option value="immediate">Dès que possible</option>
+                  <option value="1month">Dans 1 mois</option>
+                  <option value="3months">Dans 3 mois</option>
+                  <option value="6months">Dans 6 mois</option>
+                  <option value="flexible">Je suis flexible</option>
+                  <option value="urgent">URGENT - Besoin immédiat</option>
+                </select>
+              </div>
+
+              <div class="form-group required">
+                <label for="devisName">Nom complet <span class="required-asterisk">*</span></label>
+                <input type="text" id="devisName" name="name" required placeholder="Votre nom et prénom" pattern=".{3,}"
+                  title="Veuillez entrer au moins 3 caractères">
+              </div>
+
+              <div class="form-group required">
+                <label for="devisEmail">Email <span class="required-asterisk">*</span></label>
+                <input type="email" id="devisEmail" name="email" required placeholder="votre@email.com"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Veuillez entrer une adresse email valide">
+              </div>
+
+              <div class="form-group required">
+                <label for="devisPhone">Téléphone <span class="required-asterisk">*</span></label>
+                <input type="tel" id="devisPhone" name="phone" required placeholder="Votre numéro de téléphone"
+                  pattern="[0-9]{10,}"
+                  title="Veuillez entrer un numéro de téléphone valide (chiffres uniquement, minimum 10)">
+              </div>
+
+              <div class="form-group">
+                <label for="devisAddress">Adresse du projet</label>
+                <input type="text" id="devisAddress" name="address">
+              </div>
+
+              <div class="form-group required">
+                <label for="devisMessage">Détails du projet <span class="required-asterisk">*</span></label>
+                <textarea id="devisMessage" name="message" rows="5" required
+                  placeholder="Décrivez votre projet en détail, y compris les spécifications, les matériaux préférés et toute autre exigence particulière..."
+                  minlength="20"
+                  title="Veuillez fournir plus de détails sur votre projet (au moins 20 caractères)"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="devisFiles">Pièces jointes (plans, photos, devis existants)</label>
+                <input type="file" id="devisFiles" name="files" class="file-input" multiple>
+                <div class="file-info"></div>
+                <small class="file-hint">Formats acceptés : JPG, PNG, PDF, DOC, DOCX, XLS, XLSX (max 10MB au
+                  total)</small>
+              </div>
+
+              <div class="form-group required">
+                <div class="consent-checkbox">
+                  <input type="checkbox" id="devisConsent" name="consent" required>
+                  <label for="devisConsent">J'accepte que mes données soient utilisées pour me recontacter dans le cadre
+                    de ma demande de devis. <span class="required-asterisk">*</span></label>
+                </div>
+              </div>
+
+              <button type="submit" class="submit-btn">Envoyer la demande de devis</button>
             </form>
           </div>
         </div>
@@ -112,7 +231,7 @@
       <div class="project-content-wrapper">
         <!-- Buline pentru navigarea între imagini -->
         <div class="carousel-dots"></div>
-        
+
         <!-- Bara de butoane de navigare -->
         <div class="projects-buttons-container">
           <button class="project-button active" data-project="0">ACASA</button>
@@ -120,7 +239,7 @@
           <button class="project-button" data-project="2">PROIECT2</button>
           <button class="project-button" data-project="3">PROIECT3</button>
         </div>
-        
+
         <!-- Container pentru informațiile proiectului -->
         <div class="project-info-container"></div>
       </div>
@@ -138,7 +257,9 @@
             </div>
             <div class="project-info active" data-project="0">
               <!-- <h3>Bun venit</h3> -->
-              <p>Transformăm orice spațiu într-un mediu modern și funcțional, de la renovări complete la reparații specifice, atât la interior, cât și la exterior. Oferim soluții personalizate pentru case, apartamente, birouri și spații comerciale, asigurând calitate superioară și respectarea termenelor stabilite.</p>
+              <p>Transformăm orice spațiu într-un mediu modern și funcțional, de la renovări complete la reparații
+                specifice, atât la interior, cât și la exterior. Oferim soluții personalizate pentru case, apartamente,
+                birouri și spații comerciale, asigurând calitate superioară și respectarea termenelor stabilite.</p>
             </div>
           </div>
         </div>
@@ -154,7 +275,9 @@
             <div class="project-info">
               <!-- <h3>Proiect 1</h3> -->
               <p>
-                Soluții complete de instalații electrice și sanitare, asigurând siguranță, eficiență și respectarea tuturor standardelor în vigoare. Proiectare, montaj și întreținere la cele mai înalte standarde de calitate, cu materiale premium și tehnologii moderne.
+                Soluții complete de instalații electrice și sanitare, asigurând siguranță, eficiență și respectarea
+                tuturor standardelor în vigoare. Proiectare, montaj și întreținere la cele mai înalte standarde de
+                calitate, cu materiale premium și tehnologii moderne.
               </p>
             </div>
           </div>
@@ -170,7 +293,9 @@
             <div class="project-info">
               <!-- <h3>Proiect 2</h3> -->
               <p>
-                Montaj profesional de gresie, faianță și parchet, cu atenție la detalii și asigurând un rezultat durabil și estetic. Lucrăm cu materiale de înaltă calitate și oferim consultanță în alegerea materialelor potrivite pentru fiecare spațiu.
+                Montaj profesional de gresie, faianță și parchet, cu atenție la detalii și asigurând un rezultat durabil
+                și estetic. Lucrăm cu materiale de înaltă calitate și oferim consultanță în alegerea materialelor
+                potrivite pentru fiecare spațiu.
               </p>
             </div>
           </div>
@@ -186,7 +311,9 @@
             <div class="project-info">
               <!-- <h3>Proiect 3</h3> -->
               <p>
-                Design și realizare de mobilier personalizat, adaptat perfect nevoilor și preferințelor dumneavoastră. Oferim soluții integrate de mobilier pentru toate încăperile casei sau biroului dumneavoastră, de la bucătărie și dormitoare la birouri și spații de depozitare.
+                Design și realizare de mobilier personalizat, adaptat perfect nevoilor și preferințelor dumneavoastră.
+                Oferim soluții integrate de mobilier pentru toate încăperile casei sau biroului dumneavoastră, de la
+                bucătărie și dormitoare la birouri și spații de depozitare.
               </p>
             </div>
           </div>
@@ -351,14 +478,15 @@
             <i class="fas fa-angle-double-down"></i>
           </div> -->
         </div>
-        
+
         <div class="tab-content" id="terms" style="display: none">
           <div class="service">
             <i class="fas fa-undo service-icon"></i>
             <div class="service-content">
               <h2>POLITICA DE RETUR</h2>
               <p>
-                Ne străduim să oferim servicii de cea mai înaltă calitate. În cazul în care nu sunteți mulțumit de rezultat, vă oferim următoarele opțiuni:
+                Ne străduim să oferim servicii de cea mai înaltă calitate. În cazul în care nu sunteți mulțumit de
+                rezultat, vă oferim următoarele opțiuni:
               </p>
               <ul class="terms-list">
                 <li>Rezolvarea oricăror probleme în termen de 14 zile de la finalizarea lucrărilor</li>
@@ -773,153 +901,43 @@
       </div>
     </div>
   </div>
-  <!-- Devis Modal -->
-  <div id="devisModal" class="modal">
-    <div class="modal-content">
-      <span class="close-modal">&times;</span>
-      <h2>Demander un Devis</h2>
-      
-      <form id="devisForm" class="contact-form">
-        <h3>Demande de devis personnalisé</h3>
-        
-        <!-- Service Selection -->
-        <div class="form-group required">
-          <label for="serviceType">Type de service <span class="required-asterisk">*</span></label>
-          <select id="serviceType" name="serviceType" required>
-            <option value="" disabled selected>Sélectionnez un service</option>
-            <option value="renovare">RENOVARE INTERIOARĂ & EXTERIOARĂ</option>
-            <option value="instalatii">INSTALAȚII ELECTRICE & SANITARE</option>
-            <option value="montaj">MONTAJ GRESIE, FAIANȚĂ, PARCHET</option>
-            <option value="finisaje">FINISAJE & ZUGĂRĂVELI</option>
-            <option value="altul">Alt serviciu</option>
-          </select>
-        </div>
-
-        <!-- Project Type -->
-        <div class="form-group required">
-          <label for="projectType">Type de projet <span class="required-asterisk">*</span></label>
-          <select id="projectType" name="projectType" required>
-            <option value="" disabled selected>Sélectionnez le type de projet</option>
-            <option value="residential">Résidentiel (maison, appartement)</option>
-            <option value="commercial">Commercial (bureau, magasin, restaurant)</option>
-            <option value="industrial">Industriel (halls, entrepôts)</option>
-            <option value="other">Autre</option>
-          </select>
-        </div>
-
-        <!-- Project Size -->
-        <div class="form-group">
-          <label for="projectSize">Superficie du projet (m²)</label>
-          <input type="number" id="projectSize" name="projectSize" min="1" placeholder="Ex: 75">
-        </div>
-
-        <!-- Timeline -->
-        <div class="form-group">
-          <label for="timeline">Délai de réalisation souhaité</label>
-          <select id="timeline" name="timeline">
-            <option value="">Sélectionnez une période</option>
-            <option value="urgent">Moins d'un mois</option>
-            <option value="1-3">1-3 mois</option>
-            <option value="3-6">3-6 mois</option>
-            <option value="6+">Plus de 6 mois</option>
-            <option value="flexible">Je suis flexible</option>
-          </select>
-        </div>
-
-        <!-- Start Date -->
-        <div class="form-group">
-          <label for="startDate">Période de démarrage souhaitée</label>
-          <select id="startDate" name="startDate">
-            <option value="">Quand souhaitez-vous commencer ?</option>
-            <option value="immediate">Dès que possible</option>
-            <option value="1month">Dans 1 mois</option>
-            <option value="3months">Dans 3 mois</option>
-            <option value="6months">Dans 6 mois</option>
-            <option value="flexible">Je suis flexible</option>
-            <option value="urgent">URGENT - Besoin immédiat</option>
-          </select>
-        </div>
-
-        <div class="form-group required">
-          <label for="devisName">Nom complet <span class="required-asterisk">*</span></label>
-          <input type="text" id="devisName" name="name" required 
-                 placeholder="Votre nom et prénom"
-                 pattern=".{3,}" 
-                 title="Veuillez entrer au moins 3 caractères">
-        </div>
-        
-        <div class="form-group required">
-          <label for="devisEmail">Email <span class="required-asterisk">*</span></label>
-          <input type="email" id="devisEmail" name="email" required
-                 placeholder="votre@email.com"
-                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                 title="Veuillez entrer une adresse email valide">
-        </div>
-        
-        <div class="form-group required">
-          <label for="devisPhone">Téléphone <span class="required-asterisk">*</span></label>
-          <input type="tel" id="devisPhone" name="phone" required
-                 placeholder="Votre numéro de téléphone"
-                 pattern="[0-9]{10,}" 
-                 title="Veuillez entrer un numéro de téléphone valide (chiffres uniquement, minimum 10)">
-        </div>
-        
-        <div class="form-group">
-          <label for="devisAddress">Adresse du projet</label>
-          <input type="text" id="devisAddress" name="address">
-        </div>
-        
-        <div class="form-group required">
-          <label for="devisMessage">Détails du projet <span class="required-asterisk">*</span></label>
-          <textarea id="devisMessage" name="message" rows="5" required 
-                    placeholder="Décrivez votre projet en détail, y compris les spécifications, les matériaux préférés et toute autre exigence particulière..."
-                    minlength="20"
-                    title="Veuillez fournir plus de détails sur votre projet (au moins 20 caractères)"></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label for="devisFiles">Pièces jointes (plans, photos, devis existants)</label>
-          <input type="file" id="devisFiles" name="files" class="file-input" multiple>
-          <div class="file-info"></div>
-          <small class="file-hint">Formats acceptés : JPG, PNG, PDF, DOC, DOCX, XLS, XLSX (max 10MB au total)</small>
-        </div>
-        
-        <div class="form-group required">
-          <div class="consent-checkbox">
-            <input type="checkbox" id="devisConsent" name="consent" required>
-            <label for="devisConsent">J'accepte que mes données soient utilisées pour me recontacter dans le cadre de ma demande de devis. <span class="required-asterisk">*</span></label>
-          </div>
-        </div>
-        
-        <button type="submit" class="submit-btn">Envoyer la demande de devis</button>
-      </form>
-    </div>
-  </div>
 
   <!-- Script-uri cu defer pentru a nu bloca randarea paginii -->
   <script src="script.js" defer></script>
   <script src="js/contact-modal.js" defer></script>
   <script src="js/devis-modal.js" defer></script>
   <script src="js/resizer.js" defer></script>
-  
+
   <!-- Preload pentru font-uri critice -->
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-  
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2"
+    as="font" type="font/woff2" crossorigin>
+
   <!-- Loader pentru prima încărcare -->
-  <div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;justify-content:center;align-items:center;transition:opacity 0.3s ease-out;">
-    <div style="width:50px;height:50px;border:5px solid #f3f3f3;border-top:5px solid #3498db;border-radius:50%;animation:spin 1s linear infinite"></div>
+  <div id="loader"
+    style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;justify-content:center;align-items:center;transition:opacity 0.3s ease-out;">
+    <div
+      style="width:50px;height:50px;border:5px solid #f3f3f3;border-top:5px solid #3498db;border-radius:50%;animation:spin 1s linear infinite">
+    </div>
   </div>
   <script>
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       var loader = document.getElementById('loader');
       loader.style.opacity = '0';
-      setTimeout(function() {
+      setTimeout(function () {
         loader.style.display = 'none';
       }, 300);
     });
   </script>
   <style>
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </body>
 
