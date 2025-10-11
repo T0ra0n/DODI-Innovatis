@@ -1,64 +1,9 @@
-// Funcție pentru a preîncărca toate imaginile
-function preloadAllImages() {
-  return new Promise((resolve) => {
-    const images = document.querySelectorAll('img[src]');
-    let loaded = 0;
-    
-    if (images.length === 0) {
-      resolve();
-      return;
-    }
-
-    const imageLoadHandler = () => {
-      loaded++;
-      if (loaded === images.length) {
-        resolve();
-      }
-    };
-
-    images.forEach(img => {
-      if (img.complete) {
-        loaded++;
-      } else {
-        img.addEventListener('load', imageLoadHandler);
-        img.addEventListener('error', imageLoadHandler);
-      }
-    });
-
-    // Verificăm din nou în cazul în care toate imaginile s-au încărcat între timp
-    if (loaded === images.length) {
-      resolve();
-    }
-  });
-}
-
-// Ascundem conținutul principal până când toate imaginile sunt încărcate
-const mainContent = document.querySelector('main, .main-container');
-if (mainContent) {
-  mainContent.style.visibility = 'hidden';
-}
-
-// Așteptăm încărcarea tuturor resurselor
-window.addEventListener('load', function() {
-  // Așteptăm încărcarea tuturor imaginilor
-  preloadAllImages().then(() => {
-    // Ascundem loader-ul după o mică întârziere pentru un efect mai plăcut
-    setTimeout(() => {
-      const loader = document.getElementById('loader');
-      if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-          loader.style.display = 'none';
-          if (mainContent) {
-            mainContent.style.visibility = 'visible';
-          }
-        }, 300);
-      }
-    }, 500);
-  });
-});
-
 document.addEventListener('DOMContentLoaded', function () {
+    // Adăugăm animație la încărcarea inițială a paginii
+const initialTabContent = document.querySelector('.tab-content:not([style*="display: none"])');
+if (initialTabContent) {
+    initialTabContent.classList.add('fade-in-up');
+}
     // Funcționalitate de căutare
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.querySelector('.search-btn');
@@ -343,6 +288,17 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.classList.toggle('active', parseInt(btn.dataset.project) === projectNumber);
         });
 
+        // Resetăm clasa de animație pentru a forța reaplicarea ei
+        const projectInfo = project.querySelector('.project-info');
+        if (projectInfo) {
+            const paragraphs = projectInfo.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                p.classList.remove('fade-in-up');
+                void p.offsetWidth; // Forțăm reflow
+                p.classList.add('fade-in-up');
+            });
+        }
+
         // Preîncărcăm imaginile înainte de a modifica DOM-ul pentru a evita flickering-ul
         const projectImages = project.querySelectorAll('.project-image');
         const totalImages = projectImages.length;
@@ -460,8 +416,13 @@ document.addEventListener('DOMContentLoaded', function () {
             targetButtons[0].classList.add('active');
         }
         if (targetContents.length > 0) {
-            targetContents[0].classList.add('active');
-            targetContents[0].style.display = 'block';
+            const firstContent = targetContents[0];
+            firstContent.classList.add('active');
+            firstContent.style.display = 'block';
+            // Forțăm un reflow pentru a reseta animația
+            void firstContent.offsetWidth;
+            // Adăugăm clasa de animație
+            firstContent.classList.add('fade-in-up');
         }
     }
 
@@ -510,6 +471,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (contentToShow) {
                 contentToShow.classList.add('active');
                 contentToShow.style.display = 'block';
+                // Forțăm un reflow pentru a reseta animația
+                void contentToShow.offsetWidth;
+                // Adăugăm clasa de animație
+                contentToShow.classList.add('fade-in-up');
             }
 
             // Ensure the collaborator tab is active
@@ -547,6 +512,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (contentToShow) {
                 contentToShow.classList.add('active');
                 contentToShow.style.display = 'block';
+                // Forțăm un reflow pentru a reseta animația
+                void contentToShow.offsetWidth;
+                // Adăugăm clasa de animație
+                contentToShow.classList.add('fade-in-up');
             }
 
             // Ensure the partner tab and panel are active
@@ -636,10 +605,14 @@ document.addEventListener('DOMContentLoaded', function () {
             mainTabButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            // Show the corresponding tab content
+            // Show the corresponding tab content with fade-in animation
             mainTabContents.forEach(content => {
                 if (content.id === tabId) {
                     content.style.display = 'block';
+                    // Reset and apply fade-in animation
+                    content.classList.remove('fade-in-up');
+                    void content.offsetWidth; // Force reflow
+                    content.classList.add('fade-in-up');
                 } else {
                     content.style.display = 'none';
                 }
@@ -833,13 +806,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Add scroll event listeners for both sections
-    if (servicesSection) {
+    if (servicesSection && scrollIndicators.length > 0) {
         servicesSection.addEventListener('scroll', checkScrollPosition(servicesSection, scrollIndicators[0]));
         // Initial check
         checkScrollPosition(servicesSection, scrollIndicators[0])();
     }
 
-    if (aboutSection) {
+    if (aboutSection && scrollIndicators.length > 1) {
         aboutSection.addEventListener('scroll', checkScrollPosition(aboutSection, scrollIndicators[1]));
         // Initial check
         checkScrollPosition(aboutSection, scrollIndicators[1])();
