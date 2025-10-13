@@ -15,6 +15,22 @@
   --text-light: #fff;
 }
 
+/* Legal information container */
+.legal-info-container {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  color: #000000;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.legal-info-container p {
+  margin: 0;
+  color: #000000;
+}
+
 /* Resetare și stilizare de bază */
 * {
   margin: 0;
@@ -70,6 +86,11 @@ p {
 /* Resetăm margin-ul pentru ultimul paragraf din fiecare container */
 p:last-child {
   margin-bottom: 0;
+}
+
+/* Hide mobile footer by default (will be shown on mobile via responsive.css) */
+.mobile-footer {
+  display: none;
 }
 
 /* Stil global pentru toate link-urile */
@@ -163,7 +184,7 @@ button,
 .contact-form {
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
+  /* max-height: 100vh; */
   overflow-y: auto;
   padding-right: 10px;
   scrollbar-width: thin;
@@ -454,33 +475,6 @@ textarea:invalid+.error-message {
   box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.2);
 }
 
-/* Stilizare pentru ecrane mici */
-@media (max-width: 768px) {
-  .contact-form {
-    max-height: 60vh;
-    padding-right: 5px;
-  }
-
-  .form-group input[type="text"],
-  .form-group input[type="email"],
-  .form-group input[type="tel"],
-  .form-group input[type="number"],
-  .form-group textarea,
-  .form-group select {
-    padding: 10px 12px;
-    font-size: 1em;
-  }
-
-  .submit-btn {
-    padding: 12px 20px;
-    font-size: 1em;
-  }
-
-  .consent-checkbox label {
-    font-size: 0.85em;
-  }
-}
-
 /* Stiluri pentru containerul de butoane de proiecte */
 .left-large {
   position: relative;
@@ -505,6 +499,35 @@ textarea:invalid+.error-message {
   flex-direction: column;
   overflow-y: auto;
   /* Permite scroll dacă conținutul depășește înălțimea */
+}
+
+/* Carousel Overlay */
+.carousel-overlay {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  z-index: 5;
+  background-color: transparent;
+  padding: 2rem;
+  max-width: 100%;
+}
+
+.carousel-overlay h1 {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  line-height: 1.1;
+}
+
+.carousel-overlay p {
+  font-size: 1.2rem;
+  margin: 0;
+  line-height: 1.5;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  max-width: 100%;
 }
 
 .carousel-wrapper {
@@ -879,16 +902,6 @@ img {
   /* Reducem spațiul dintre elemente */
 }
 
-@media (max-width: 992px) {
-  .header-phone a {
-    display: none;
-  }
-
-  .header-phone {
-    font-size: 0.9em;
-  }
-}
-
 /* Stiluri pentru bara de căutare */
 .search-container {
   position: relative;
@@ -940,19 +953,6 @@ img {
   animation: highlight-fade 3s ease-in-out;
 }
 
-@keyframes highlight-fade {
-  0% {
-    background-color: #ffeb3b;
-  }
-
-  50% {
-    background-color: #fff176;
-  }
-
-  100% {
-    background-color: #ffeb3b;
-  }
-}
 
 /* Asigură-te că textul evidențiat rămâne vizibil */
 .project-info .highlight,
@@ -1018,21 +1018,38 @@ img {
   align-items: center;
   justify-content: center;
   white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Stil pentru butonul de devis - starea normala */
+.devis-btn {
+  background-color: #2c3e50;
+  color: white !important;
+  border: 1px solid #2c3e50;
+  transform: translateY(-1px);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Stil la hover pentru butonul de devis - animatie de marire */
+.devis-btn:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Stil pentru celelalte butoane (pastrat ca inainte) */
+.btn:not(.devis-btn) {
   background-color: transparent;
   color: #2c3e50;
   border: 1px solid #d7dadd;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.btn:hover {
+.btn:not(.devis-btn):hover {
   background-color: #2c3e50;
   color: white !important;
   border-color: #2c3e50;
 }
 
-
 /* Stiluri pentru hover pe ambele butoane */
-.devis-btn:hover,
 .contact-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -1073,15 +1090,8 @@ img {
 /* Asigură-te că modal-ul are aceeași lățime cu right-small */
 .right-small {
   position: relative;
+  width: 100%;
 }
-
-/* Ajustează lățimea modal-ului pe ecrane mici */
-@media (max-width: 768px) {
-  .modal {
-    width: 100%;
-  }
-}
-
 
 .company-details {
   flex: 1;
@@ -1147,25 +1157,6 @@ img {
   z-index: 1;
 } */
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(100%);
-  }
-}
 
 .close-modal {
   position: absolute;
@@ -1220,24 +1211,6 @@ img {
   color: #333;
   min-width: 0;
   word-break: break-word;
-}
-
-/* Adjust for smaller screens */
-@media (max-width: 1200px) {
-  .detail-label {
-    min-width: 120px;
-    font-size: 0.9em;
-  }
-
-  .detail-item {
-    font-size: 0.9em;
-    margin-bottom: 4px;
-  }
-
-  .company-details h3 {
-    font-size: 1em;
-    margin-bottom: 10px;
-  }
 }
 
 /* File Input Styles */
@@ -1326,36 +1299,6 @@ img {
   background-color: #1a2d3d;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .modal-content {
-    width: 95%;
-    margin: 10% auto;
-    padding: 20px 15px;
-  }
-
-  .detail-item {
-    flex-direction: column;
-  }
-
-  .detail-label {
-    margin-bottom: 5px;
-  }
-}
-
-/* Modal Animation */
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 
 
 
@@ -1435,7 +1378,7 @@ img {
     linear-gradient(-45deg, transparent 75%, #60708d 75%);
   background-size: 60px 60px;
   background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
-  padding: 20px 0px 30px 30px;
+  padding: 20px 0px 0px 30px;
   color: var(--text-light);
   overflow: hidden;
   flex-direction: column;
@@ -1447,7 +1390,7 @@ img {
 .tabs-container {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 10px;
 }
@@ -1512,6 +1455,7 @@ img {
   gap: 12px;
   width: 100%;
   padding: 12px 0;
+  margin-top: 10px;
 }
 
 /* Stiluri pentru containere */
@@ -1586,7 +1530,7 @@ img {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  /* overflow: hidden; */
+  overflow: hidden;
   padding: 8px 4px;
   display: flex;
   flex-direction: column;
@@ -1608,14 +1552,12 @@ img {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: normal;
+  white-space: nowrap;
   text-align: center;
   max-width: 100%;
   line-height: 1.2;
-  max-height: 2.4em;
   margin: 0 auto;
   padding: 0 5px;
-  word-break: break-word;
 }
 
 .section-tabs {
@@ -1806,17 +1748,6 @@ img {
   line-height: 1.6;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Stiluri pentru carusel */
 .partner-content ul,
@@ -1978,14 +1909,9 @@ img {
   line-height: 1.3;
   text-transform: uppercase;
   /* letter-spacing: 0.5px; */
-  word-break: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  max-height: 2.6em;
+  white-space: nowrap;
   width: 100%;
   margin: 0;
 }
@@ -2033,21 +1959,6 @@ img {
 }
 
 /* Stiluri pentru ecrane mici */
-@media (max-width: 768px) {
-  .collaborators-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-
-  .collaborator-btn i {
-    font-size: 1.2em;
-  }
-
-  .right-large {
-    padding: 15px;
-  }
-}
-
 .collaborator-btn i {
   width: 40px;
   height: 40px;
@@ -2057,27 +1968,6 @@ img {
 .collaborator-content li {
   font-size: 0.9em;
   margin-bottom: 8px;
-}
-
-@media (max-width: 480px) {
-  .collaborators-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-  }
-
-  .collaborator-btn {
-    padding: 6px 2px;
-  }
-
-  .collaborator-btn i {
-    width: 36px;
-    height: 36px;
-    font-size: 0.9em;
-  }
-
-  .collaborator-content p {
-    font-size: 0.9em;
-  }
 }
 
 /* Stilurile pentru paragrafe sunt acum definite global */
@@ -2090,44 +1980,6 @@ img {
   border-radius: var(--border-radius);
 }
 
-@media (max-width: 768px) {
-  .carousel-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .projects-buttons-container {
-    width: 100%;
-    margin-top: 15px;
-  }
-
-  .project-info-container {
-    margin-top: 15px;
-  }
-
-  .left-small,
-  .right-large {
-    flex: 1 1 auto !important;
-    /* Resetează flex-ul pentru layout vertical */
-    max-width: 100% !important;
-    /* Asigură lățime completă pe mobil */
-    height: 50%;
-  }
-
-  .content {
-    font-size: 0.9em;
-  }
-}
-
-@media (max-width: 480px) {
-  .content {
-    padding: 10px;
-    font-size: 0.8em;
-  }
-}
-
-/* Stilizare carusel */
 .carousel-wrapper {
   position: relative;
   width: 100%;
@@ -2247,19 +2099,6 @@ img {
   display: block;
 }
 
-/* Stiluri pentru scrollbar minimalist */
-.tabs-container .tab-content {
-  max-height: 70vh;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  /* Pentru Firefox */
-  scrollbar-color: #d7dadd transparent;
-  /* Culoare și culoare de fundal pentru Firefox */
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  /* Pentru Internet Explorer și Edge */
-  padding-right: 8px;
-  /* Spatiu pentru a evita suprapunerea conținutului peste scrollbar */
-}
 
 /* Stilizare scrollbar pentru Chrome, Safari și Opera */
 .tabs-container .tab-content::-webkit-scrollbar {

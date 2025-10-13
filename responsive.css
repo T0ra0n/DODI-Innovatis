@@ -1,0 +1,425 @@
+.site-header {
+  min-height: 8vh;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  max-width: 200px;
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 10px;
+}
+
+.header-buttons {
+  display: flex;
+  margin: 0;
+  width: auto;
+}
+
+
+/* Mobile styles (max-width: 767px) */
+@media screen and (max-width: 767px) {
+
+  .bottom-small {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Aliniere la începutul containerului */
+  align-items: center; /* Centrare orizontală */
+  height: 100%; /* Asigură înălțimea completă */
+  width: 100%; /* Lățime completă */
+  padding: 15px 15px 50px 15px; /* Spațiu interior */
+  box-sizing: border-box; /* Include padding-ul în dimensiunea totală */
+  overflow-y: auto; /* Permite scroll dacă conținutul depășește înălțimea */
+  gap: 0px;
+}
+
+  .social-links {
+  display: none;
+  justify-content: center;
+  margin: 10px 0;
+} 
+
+.devis-btn {
+  padding: 6px 12px;
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+  .modal {
+    width: 100% !important;
+    right: 0;
+    left: 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+  }
+
+  .modal.open {
+    transform: translateX(0);
+  }
+
+  .modal-content {
+    padding: 50px 20px 40px;
+    position: relative;
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .close-modal {
+    position: fixed;
+    top: 15px;
+    right: 10px;
+    font-size: 28px;
+    z-index: 1001;
+  }
+
+  #devisForm, #contactForm {
+    padding-bottom: 20px;
+  }
+
+  .main-container {
+    flex-direction: column;
+    height: auto;
+    gap: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .left-large {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 86vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .right-small {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 0;
+    box-shadow: none;
+    gap: 0;
+  }
+
+  .top-large {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .resizer,
+  .carousel-button.next,
+  .carousel-button.prev {
+    display: none;
+  }
+
+  .projects-buttons-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 5px 5px 0;
+    gap: 1px;
+    width: 100%;
+    white-space: nowrap;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .projects-buttons-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    font-size: 0.75em;
+    white-space: nowrap;
+    height: 30px;
+    border-radius: 4px 4px 0 0;
+    min-width: auto;
+    width: auto;
+    flex: 0 0 auto;
+    margin: 0 2px;
+  }
+
+  .project-button.active {
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+
+  .project-button span {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tabs-container,
+  .section-tabs {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 20px 5px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    display: flex;
+    gap: 1px;
+  }
+
+  .tabs-container::-webkit-scrollbar,
+  .section-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-button,
+  .section-tab {
+    padding: 8px 15px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    margin: 0 1px;
+    min-width: max-content;
+    text-align: center;
+  }
+
+  .tab-content,
+  .collaborator-content,
+  .partner-content {
+    padding: 10px;
+    max-height: none !important;
+    overflow-y: visible;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .tab-content.fade-in-up {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .tab-content.fade-in-up > * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #services,
+  #about,
+  #terms {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .carousel-wrapper {
+    position: absolute;
+  }
+
+  .project-info-container p {
+    font-size: 12px;
+  }
+
+  .carousel-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    min-height: 40vh;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .carousel-nav {
+    padding: 5px 0;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .carousel-dot.active {
+    background-color: #fff;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  footer {
+    padding: 15px 10px;
+    text-align: center;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .carousel-overlay h1 {
+    font-size: 3em;
+  }
+  
+  .carousel-overlay p {
+    white-space: normal;
+  }
+  
+  .carousel-overlay p br {
+    display: none;
+  }
+
+  .mobile-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    min-height: 50px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  body {
+    padding-bottom: 5vh;
+  }
+
+  .footer-phone {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+  }
+
+  .footer-phone a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer-phone i {
+    margin-right: 5px;
+    color: #2c3e50;
+  }
+
+  .footer-social-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-social-links .social-link {
+    color: #2c3e50;
+    font-size: 1.2em;
+    transition: color 0.2s ease;
+  }
+
+  .footer-social-links .social-link:hover {
+    color: #1a73e8;
+  }
+
+  /* Add padding to main content to prevent footer overlap */
+  body {
+    padding-bottom: 100px;
+  }
+
+  /* Show mobile footer only on mobile */
+  .mobile-footer {
+    display: flex;
+  }
+}
+
+
+.bottom-small > * {
+  width: 100%; /* Toate elementele copil ocupă toată lățimea */
+  margin: 5px 0; /* Spațiu vertical între elemente */
+  box-sizing: border-box;
+}
+
+/* Ajustări pentru elementele specifice din interiorul .bottom-small */
+.bottom-small .project-info-container,
+.bottom-small .project-description,
+.bottom-small .project-buttons {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Asigură-te că imaginile se scalează corespunzător */
+.bottom-small img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

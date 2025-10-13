@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get modal elements
     const modal = document.getElementById('contactModal');
     const openBtn = document.getElementById('openContactModal');
+    const emailLink = document.getElementById('emailSocialLink');
     const closeBtn = document.querySelector('.close-modal');
     const contactForm = document.getElementById('contactForm');
     
@@ -30,9 +31,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300); // Match this with the CSS transition duration
     }
 
-    // Open modal
+    // Open modal from contact button (kept for backward compatibility)
     if (openBtn) {
         openBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+    }
+
+    // Open modal from email icon
+    if (emailLink) {
+        emailLink.addEventListener('click', function(e) {
             e.preventDefault();
             openModal();
         });

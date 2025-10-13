@@ -217,44 +217,40 @@ if (initialTabContent) {
     const projectContents = document.querySelectorAll('.project-content');
 
     // Funcționalitate fullscreen
-    function toggleFullscreen() {
-        const carouselWrapper = document.querySelector('.carousel-wrapper');
+function toggleFullscreen() {
+    const carouselWrapper = document.querySelector('.carousel-wrapper');
+    const carouselOverlay = document.querySelector('.carousel-overlay');
         
-        if (!document.fullscreenElement) {
-            // Intră în modul fullscreen
-            if (carouselWrapper.requestFullscreen) {
-                carouselWrapper.requestFullscreen();
-            } else if (carouselWrapper.webkitRequestFullscreen) { /* Safari */
-                carouselWrapper.webkitRequestFullscreen();
-            } else if (carouselWrapper.msRequestFullscreen) { /* IE11 */
-                carouselWrapper.msRequestFullscreen();
-            }
-        } else {
-            // Ieși din modul fullscreen
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) { /* Safari */
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { /* IE11 */
-                document.msExitFullscreen();
-            }
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) {
+        // Entering fullscreen
+        if (carouselWrapper.requestFullscreen) {
+            carouselWrapper.requestFullscreen();
+        } else if (carouselWrapper.webkitRequestFullscreen) {
+            carouselWrapper.webkitRequestFullscreen();
+        } else if (carouselWrapper.mozRequestFullScreen) {
+            carouselWrapper.mozRequestFullScreen();
+        }
+        // Hide the overlay when entering fullscreen
+        if (carouselOverlay) {
+            carouselOverlay.style.display = 'none';
+        }
+    } else {
+        // Exiting fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        }
+        // Show the overlay when exiting fullscreen
+        if (carouselOverlay) {
+            carouselOverlay.style.display = 'block';
         }
     }
+}
 
-    // Schimbă iconița când se schimbă modul fullscreen
-    document.addEventListener('fullscreenchange', updateFullscreenButton);
-    document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-    document.addEventListener('mozfullscreenchange', updateFullscreenButton);
-    document.addEventListener('MSFullscreenChange', updateFullscreenButton);
-
-    function updateFullscreenButton() {
-        const fullscreenBtn = document.querySelector('.fullscreen-btn');
-        if (document.fullscreenElement) {
-            fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
-        } else {
-            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-        }
-    }
+    // Fullscreen functionality moved to fullscreen.js
 
     // Inițializare elemente
     function initElements() {
@@ -292,6 +288,20 @@ if (initialTabContent) {
             e.preventDefault();
             const projectNumber = parseInt(this.dataset.project);
             showProject(projectNumber);
+            
+            // Ascunde overlay-ul când se schimbă proiectul, dar nu și când e butonul Acasă
+            if (projectNumber !== 0) {
+                const carouselOverlay = document.querySelector('.carousel-overlay');
+                if (carouselOverlay) {
+                    carouselOverlay.style.display = 'none';
+                }
+            } else {
+                // Arată overlay-ul când se apasă pe butonul Acasă
+                const carouselOverlay = document.querySelector('.carousel-overlay');
+                if (carouselOverlay) {
+                    carouselOverlay.style.display = 'block';
+                }
+            }
         });
     });
 

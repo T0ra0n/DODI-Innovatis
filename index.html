@@ -23,6 +23,7 @@
   <meta name="msapplication-TileColor" content="#2b5797" />
   <meta name="theme-color" content="#ffffff" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="responsive.css" media="screen and (max-width: 1024px)" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 
@@ -45,10 +46,10 @@
           <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" id="emailSocialLink" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
         <div class="header-buttons">
           <button type="button" class="btn devis-btn" id="openDevisModal">Demander un Devis</button>
-          <button type="button" class="btn contact-btn" id="openContactModal">Contact</button>
         </div>
 
         <!-- Contact Modal -->
@@ -57,7 +58,17 @@
             <span class="close-modal">&times;</span>
             <h2>Contactez-nous</h2>
 
-
+            <div class="legal-info-container">
+              <p><strong>Informații legale:</strong><br>
+                SIREN: 853 760 346<br>
+                SIRET (sediu): 853 760 346 00017<br>
+                Formă juridică: SAS, societate pe acțiuni simplificată<br>
+                Număr TVA: FR27853760346<br>
+                Înscris la RCS: ÎNREGISTRAT (la registrul de comerț din PONTOISE, la 12/09/2019)<br>
+                Număr RCS: 853 760 346 R.C.S. Pontoise
+              </p>
+            </div>
+            
             <form id="contactForm" class="contact-form">
               <h3>Envoyez-nous un message</h3>
               <div class="form-group required">
@@ -214,6 +225,10 @@
         <button class="fullscreen-btn" aria-label="Fullscreen">
           <i class="fas fa-expand"></i>
         </button>
+        <div class="carousel-overlay">
+          <h1>Rénovation<br>Du Bâtiment</h1>
+          <p>Des solutions complètes pour vos projets de<br>construction et de rénovation</p>
+        </div>
         <div class="carousel">
           <button class="carousel-button prev">
             <i class="fas fa-chevron-left"></i>
@@ -411,14 +426,14 @@
                 abordare inovatoare și atenția la detalii în fiecare proiect
                 pe care îl întreprindem.
               </p>
-              <p><strong>Informații legale:</strong><br>
+              <!-- <p><strong>Informații legale:</strong><br>
                 SIREN: 853 760 346<br>
                 SIRET (sediu): 853 760 346 00017<br>
                 Formă juridică: SAS, societate pe acțiuni simplificată<br>
                 Număr TVA: FR27853760346<br>
                 Înscris la RCS: ÎNREGISTRAT (la registrul de comerț din PONTOISE, la 12/09/2019)<br>
                 Număr RCS: 853 760 346 R.C.S. Pontoise
-              </p>
+              </p> -->
             </div>
           </div>
 
@@ -902,8 +917,20 @@
     </div>
   </div>
 
+  <!-- Mobile Footer -->
+  <footer class="mobile-footer">
+    <div class="footer-social-links">
+      <a href="tel:+33663943753" class="social-link" aria-label="Sună"><i class="fas fa-phone"></i></a>
+      <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" class="social-link" id="mobileEmailLink" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+  </footer>
+
   <!-- Script-uri cu defer pentru a nu bloca randarea paginii -->
   <script src="script.js" defer></script>
+  <script src="fullscreen.js" defer></script>
   <script src="js/contact-modal.js" defer></script>
   <script src="js/devis-modal.js" defer></script>
   <script src="js/resizer.js" defer></script>
@@ -911,6 +938,30 @@
   <!-- Preload pentru font-uri critice -->
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2"
     as="font" type="font/woff2" crossorigin>
+
+  <!-- Script pentru functionalitatea footer-ului mobil -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileEmailLink = document.getElementById('mobileEmailLink');
+      const openContactModal = () => {
+        const modal = document.getElementById('contactModal');
+        if (modal) {
+          modal.style.display = 'block';
+          document.body.style.overflow = 'hidden';
+          setTimeout(() => {
+            modal.classList.add('open');
+          }, 10);
+        }
+      };
+
+      if (mobileEmailLink) {
+        mobileEmailLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          openContactModal();
+        });
+      }
+    });
+  </script>
 
   <!-- Loader pentru prima încărcare -->
   <div id="loader"
