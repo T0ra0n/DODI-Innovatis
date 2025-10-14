@@ -23,23 +23,50 @@ if (document.readyState === 'loading') {
     preloadImages();
 }
 
-// Detectare dispozitiv mobil
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+// Detectare browser și dispozitiv
+const userAgent = navigator.userAgent;
+const isIOS = /iPad|iPhone|iPod/.test(userAgent) || 
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isChromeOnIOS = /CriOS|FxiOS/i.test(userAgent) && isIOS;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
 
 // Funcție pentru a forța scroll-ul în sus
 function scrollToTop() {
-    // Încearcă mai multe metode pentru a asigura funcționarea pe toate dispozitivele
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0; // Pentru Safari
-    document.documentElement.scrollTop = 0; // Pentru Chrome, Firefox, IE și Opera
-    
-    // Pe iOS, uneori este nevoie de un mic delay
-    if (isMobile) {
+    // Pentru Chrome pe iOS, încercăm o abordare mai agresivă
+    if (isChromeOnIOS) {
+        // Această abordare este mai agresivă și funcționează mai bine pe Chrome/iOS
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        
+        // Resetăm poziția de scroll
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        
+        // Restabilim overflow-ul după un scurt delay
         setTimeout(() => {
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+            
+            // Mai încercăm o dată după ce am resetat overflow-ul
             window.scrollTo(0, 0);
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
-        }, 100);
+        }, 50);
+    } else {
+        // Pentru celelalte browsere, folosim abordarea standard
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        
+        // Pe iOS, adăugăm un delay suplimentar
+        if (isIOS) {
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }, 100);
+        }
     }
 }
 
