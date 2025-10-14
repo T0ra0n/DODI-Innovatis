@@ -3,7 +3,7 @@
 
 .site-header {
     width: 100%;
-    height: 8vh;
+    height: 8svh;
     background-color: transparent;
     color: black;
     display: flex;
@@ -168,7 +168,7 @@
 
 .left-large {
   width: 100% !important;
-  height: 85vh !important;
+  height: 85svh !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   padding: 0 !important;
@@ -402,7 +402,7 @@
   }
 
   .mobile-footer {
-    height: 7vh;
+    height: 7svh;
     display: flex;
     justify-content: center;
     align-items: center;
