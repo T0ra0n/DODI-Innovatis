@@ -23,10 +23,38 @@ if (document.readyState === 'loading') {
     preloadImages();
 }
 
-// Asigură-te că pagina se reîncarcă mereu de la început
-window.addEventListener('beforeunload', function() {
+// Detectare dispozitiv mobil
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+// Funcție pentru a forța scroll-ul în sus
+function scrollToTop() {
+    // Încearcă mai multe metode pentru a asigura funcționarea pe toate dispozitivele
     window.scrollTo(0, 0);
-});
+    document.body.scrollTop = 0; // Pentru Safari
+    document.documentElement.scrollTop = 0; // Pentru Chrome, Firefox, IE și Opera
+    
+    // Pe iOS, uneori este nevoie de un mic delay
+    if (isMobile) {
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }, 100);
+    }
+}
+
+// Asigură-te că pagina se reîncarcă mereu de la început
+window.addEventListener('beforeunload', scrollToTop);
+window.addEventListener('pagehide', scrollToTop);
+
+// Pe iOS, adăugăm un eveniment suplimentar pentru schimbarea hash-ului
+if (isMobile) {
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            scrollToTop();
+        }
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     // Adăugăm animație la încărcarea inițială a paginii
@@ -38,7 +66,12 @@ document.addEventListener('DOMContentLoaded', function () {
     preloadImages();
     
     // Asigură-te că pagina începe de sus la încărcare
-    window.scrollTo(0, 0);
+    scrollToTop();
+    
+    // Pe mobil, adăugăm un mic delay suplimentar pentru a contracara orice ajustare de către browser
+    if (isMobile) {
+        setTimeout(scrollToTop, 300);
+    }
     // Funcționalitate de căutare
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.querySelector('.search-btn');
