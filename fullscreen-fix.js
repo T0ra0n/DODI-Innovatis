@@ -64,7 +64,8 @@ function toggleFullscreen() {
         if (carouselWrapper.classList.contains('carousel-fullscreen')) {
             // Pe iOS, doar eliminăm clasa CSS și restaurăm overlay-ul
             carouselWrapper.classList.remove('carousel-fullscreen');
-            console.log('Removed carousel-fullscreen class');
+            document.body.classList.remove('carousel-fullscreen-active');
+            console.log('Removed carousel-fullscreen class and body class');
 
             // Restaurăm overlay-ul la starea inițială
             const overlay = carouselWrapper.querySelector('.carousel-overlay');
@@ -99,7 +100,8 @@ function toggleFullscreen() {
                 }).catch(err => {
                     console.log('API-ul fullscreen nu funcționează pe iOS pentru carusel, folosim soluția CSS:', err);
                     carouselWrapper.classList.add('carousel-fullscreen');
-                    console.log('Applied carousel-fullscreen class');
+                    document.body.classList.add('carousel-fullscreen-active');
+                    console.log('Applied carousel-fullscreen class and body class');
                     // Asigurăm că overlay-ul este ascuns și manual dacă regula CSS nu funcționează
                     const overlay = carouselWrapper.querySelector('.carousel-overlay');
                     if (overlay) {
@@ -111,7 +113,8 @@ function toggleFullscreen() {
             } else {
                 console.log('Nicio metodă de fullscreen disponibilă pe iOS pentru carusel, folosim soluția CSS');
                 carouselWrapper.classList.add('carousel-fullscreen');
-                console.log('Applied carousel-fullscreen class');
+                document.body.classList.add('carousel-fullscreen-active');
+                console.log('Applied carousel-fullscreen class and body class');
                 // Asigurăm că overlay-ul este ascuns și manual
                 const overlay = carouselWrapper.querySelector('.carousel-overlay');
                 if (overlay) {
@@ -139,6 +142,7 @@ if (isIOS()) {
             if (carouselWrapper && carouselWrapper.classList.contains('carousel-fullscreen')) {
                 console.log('Removing carousel-fullscreen class via pinch');
                 carouselWrapper.classList.remove('carousel-fullscreen');
+                document.body.classList.remove('carousel-fullscreen-active');
 
                 // Restaurăm overlay-ul la starea inițială
                 const overlay = carouselWrapper.querySelector('.carousel-overlay');
@@ -195,6 +199,13 @@ function handleFullscreenChange() {
         overlay.style.zIndex = '';
         console.log('Overlay restored in fullscreen change handler');
     }
+
+    // Gestionăm și clasa body pentru fullscreen
+    if (isFullscreen) {
+        document.body.classList.add('carousel-fullscreen-active');
+    } else {
+        document.body.classList.remove('carousel-fullscreen-active');
+    }
 }
 
 // Adaugă acest stil în head-ul documentului dacă nu există deja
@@ -224,10 +235,11 @@ if (!document.querySelector('#carousel-fullscreen-style')) {
             margin: 0 !important;
             padding: 0 !important;
             z-index: 99999 !important;
-            background: white;
+            background: white !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
+            overflow: hidden !important;
         }
 
         .carousel-fullscreen .carousel {
@@ -235,28 +247,59 @@ if (!document.querySelector('#carousel-fullscreen-style')) {
             height: 100% !important;
             max-width: none !important;
             max-height: none !important;
+            position: relative !important;
         }
 
         .carousel-fullscreen .carousel-container {
             height: 100% !important;
+            width: 100% !important;
+            position: relative !important;
         }
 
         .carousel-fullscreen .carousel-slide {
+            width: 100vw !important;
             height: 100vh !important;
-            width: auto !important;
             max-width: none !important;
+            max-height: none !important;
             object-fit: contain !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
         }
 
-        /* Ascundem toate celelalte elemente când caruselul este în fullscreen */
-        .carousel-fullscreen ~ * {
+        /* Ascundem toate elementele din afară când caruselul este în fullscreen pe iOS și alte browsere */
+        .carousel-fullscreen ~ *,
+        .carousel-fullscreen ~ header,
+        .carousel-fullscreen ~ footer,
+        .carousel-fullscreen ~ .main-container,
+        .carousel-fullscreen ~ .resizer,
+        .carousel-fullscreen ~ .right-small {
             display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+
+        /* Asigurăm că body-ul nu se scrollează în fullscreen */
+        body.carousel-fullscreen-active {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+            height: 100% !important;
         }
 
         /* Doar caruselul și butonul de fullscreen rămân vizibile */
         .carousel-fullscreen,
         .carousel-fullscreen .fullscreen-btn {
             display: block !important;
+        }
+
+        /* Pe iOS, forțăm orientarea landscape pentru fullscreen */
+        @media screen and (max-width: 1024px) {
+            .carousel-fullscreen .carousel-slide {
+                width: 100vw !important;
+                height: 100vh !important;
+                object-fit: contain !important;
+            }
         }
     `;
     document.head.appendChild(style);
