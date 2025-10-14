@@ -47,6 +47,78 @@ function updateOverlayVisibility(hide = false) {
     }
 }
 
+// Funcție pentru ascunderea header-ului și footer-ului pe mobil
+function hideMobileElements() {
+    const header = document.querySelector('.site-header');
+    const footer = document.querySelector('footer');
+    const mobileFooter = document.querySelector('.mobile-footer');
+
+    if (header) {
+        header.style.display = 'none';
+        header.style.visibility = 'hidden';
+        header.style.position = 'absolute';
+        header.style.left = '-9999px';
+        header.style.top = '-9999px';
+        header.style.zIndex = '-1';
+    }
+
+    if (footer) {
+        footer.style.display = 'none';
+        footer.style.visibility = 'hidden';
+        footer.style.position = 'absolute';
+        footer.style.left = '-9999px';
+        footer.style.top = '-9999px';
+        footer.style.zIndex = '-1';
+    }
+
+    if (mobileFooter) {
+        mobileFooter.style.display = 'none';
+        mobileFooter.style.visibility = 'hidden';
+        mobileFooter.style.position = 'absolute';
+        mobileFooter.style.left = '-9999px';
+        mobileFooter.style.top = '-9999px';
+        mobileFooter.style.zIndex = '-1';
+    }
+
+    console.log('Header și footer ascunse manual pe mobil');
+}
+
+// Funcție pentru restaurarea header-ului și footer-ului pe mobil
+function showMobileElements() {
+    const header = document.querySelector('.site-header');
+    const footer = document.querySelector('footer');
+    const mobileFooter = document.querySelector('.mobile-footer');
+
+    if (header) {
+        header.style.display = '';
+        header.style.visibility = '';
+        header.style.position = '';
+        header.style.left = '';
+        header.style.top = '';
+        header.style.zIndex = '';
+    }
+
+    if (footer) {
+        footer.style.display = '';
+        footer.style.visibility = '';
+        footer.style.position = '';
+        footer.style.left = '';
+        footer.style.top = '';
+        footer.style.zIndex = '';
+    }
+
+    if (mobileFooter) {
+        mobileFooter.style.display = '';
+        mobileFooter.style.visibility = '';
+        mobileFooter.style.position = '';
+        mobileFooter.style.left = '';
+        mobileFooter.style.top = '';
+        mobileFooter.style.zIndex = '';
+    }
+
+    console.log('Header și footer restaurate pe mobil');
+}
+
 // Funcția principală de toggle fullscreen pentru carusel
 function toggleFullscreen() {
     const carouselWrapper = document.querySelector('.carousel-wrapper');
@@ -72,6 +144,12 @@ function toggleFullscreen() {
         if (carouselWrapper.classList.contains('carousel-fullscreen')) {
             carouselWrapper.classList.remove('carousel-fullscreen');
             document.body.classList.remove('carousel-fullscreen-active');
+
+            // Pe mobil, restaurăm header-ul și footer-ul
+            if (window.innerWidth <= 1024) {
+                showMobileElements();
+            }
+
             updateOverlayVisibility(false); // Restaurăm overlay-ul
             console.log('Ieșit din fullscreen CSS');
         } else {
@@ -92,6 +170,12 @@ function toggleFullscreen() {
                     // Fallback la CSS dacă API-ul nu funcționează
                     carouselWrapper.classList.add('carousel-fullscreen');
                     document.body.classList.add('carousel-fullscreen-active');
+
+                    // Pe mobil, ascundem imediat header-ul și footer-ul
+                    if (window.innerWidth <= 1024) {
+                        hideMobileElements();
+                    }
+
                     updateOverlayVisibility(true);
                     console.log('Fullscreen CSS activat pe iOS');
                 });
@@ -99,6 +183,12 @@ function toggleFullscreen() {
                 // Direct CSS dacă nu avem nicio metodă API
                 carouselWrapper.classList.add('carousel-fullscreen');
                 document.body.classList.add('carousel-fullscreen-active');
+
+                // Pe mobil, ascundem imediat header-ul și footer-ul
+                if (window.innerWidth <= 1024) {
+                    hideMobileElements();
+                }
+
                 updateOverlayVisibility(true);
                 console.log('Fullscreen CSS activat pe iOS (fallback)');
             }
@@ -108,6 +198,12 @@ function toggleFullscreen() {
                 // Fallback la CSS dacă API-ul nu funcționează
                 carouselWrapper.classList.add('carousel-fullscreen');
                 document.body.classList.add('carousel-fullscreen-active');
+
+                // Pe mobil, ascundem imediat header-ul și footer-ul
+                if (window.innerWidth <= 1024) {
+                    hideMobileElements();
+                }
+
                 updateOverlayVisibility(true);
                 console.log('Fullscreen CSS activat (fallback)');
             });
@@ -123,6 +219,12 @@ if (isIOS()) {
             if (carouselWrapper?.classList.contains('carousel-fullscreen')) {
                 carouselWrapper.classList.remove('carousel-fullscreen');
                 document.body.classList.remove('carousel-fullscreen-active');
+
+                // Pe mobil, restaurăm header-ul și footer-ul
+                if (window.innerWidth <= 1024) {
+                    showMobileElements();
+                }
+
                 updateOverlayVisibility(false);
                 console.log('Ieșit din fullscreen via pinch');
             } else {
@@ -150,6 +252,42 @@ function handleFullscreenChange() {
         (carouselWrapper && carouselWrapper.classList.contains('carousel-fullscreen'))
     );
 
+    // Pe mobil, ascundem manual header-ul și footer-ul când intrăm în fullscreen
+    if (isFullscreen && window.innerWidth <= 1024) {
+        const header = document.querySelector('.site-header');
+        const footer = document.querySelector('footer');
+        const mobileFooter = document.querySelector('.mobile-footer');
+
+        if (header) {
+            header.style.display = 'none';
+            header.style.visibility = 'hidden';
+            header.style.position = 'absolute';
+            header.style.left = '-9999px';
+            header.style.top = '-9999px';
+            header.style.zIndex = '-1';
+        }
+
+        if (footer) {
+            footer.style.display = 'none';
+            footer.style.visibility = 'hidden';
+            footer.style.position = 'absolute';
+            footer.style.left = '-9999px';
+            footer.style.top = '-9999px';
+            footer.style.zIndex = '-1';
+        }
+
+        if (mobileFooter) {
+            mobileFooter.style.display = 'none';
+            mobileFooter.style.visibility = 'hidden';
+            mobileFooter.style.position = 'absolute';
+            mobileFooter.style.left = '-9999px';
+            mobileFooter.style.top = '-9999px';
+            mobileFooter.style.zIndex = '-1';
+        }
+
+        console.log('Header și footer ascunse manual pe mobil');
+    }
+
     // Gestionăm overlay-ul și clasa body în funcție de stare
     updateOverlayVisibility(isFullscreen);
 
@@ -157,6 +295,42 @@ function handleFullscreenChange() {
         document.body.classList.add('carousel-fullscreen-active');
     } else {
         document.body.classList.remove('carousel-fullscreen-active');
+
+        // Pe mobil, restaurăm header-ul și footer-ul când ieșim din fullscreen
+        if (window.innerWidth <= 1024) {
+            const header = document.querySelector('.site-header');
+            const footer = document.querySelector('footer');
+            const mobileFooter = document.querySelector('.mobile-footer');
+
+            if (header) {
+                header.style.display = '';
+                header.style.visibility = '';
+                header.style.position = '';
+                header.style.left = '';
+                header.style.top = '';
+                header.style.zIndex = '';
+            }
+
+            if (footer) {
+                footer.style.display = '';
+                footer.style.visibility = '';
+                footer.style.position = '';
+                footer.style.left = '';
+                footer.style.top = '';
+                footer.style.zIndex = '';
+            }
+
+            if (mobileFooter) {
+                mobileFooter.style.display = '';
+                mobileFooter.style.visibility = '';
+                mobileFooter.style.position = '';
+                mobileFooter.style.left = '';
+                mobileFooter.style.top = '';
+                mobileFooter.style.zIndex = '';
+            }
+
+            console.log('Header și footer restaurate pe mobil');
+        }
     }
 
     console.log('Fullscreen schimbat:', isFullscreen);
@@ -204,10 +378,22 @@ if (!document.querySelector('#carousel-fullscreen-style')) {
         }
 
         @media screen and (max-width: 1024px) {
-            .carousel-fullscreen .carousel-slide {
-                width: 100vw !important;
-                height: 100vh !important;
-                object-fit: contain !important;
+            .carousel-fullscreen {
+                z-index: 2147483647 !important; /* Valoare maximă posibilă pentru z-index */
+            }
+
+            /* Forțăm ascunderea header-ului și footer-ului pe mobil în fullscreen */
+            .carousel-fullscreen ~ header,
+            .carousel-fullscreen ~ footer,
+            .carousel-fullscreen ~ .mobile-footer,
+            .carousel-fullscreen ~ .site-header {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                position: absolute !important;
+                left: -9999px !important;
+                top: -9999px !important;
+                z-index: -1 !important;
             }
         }
     `;
