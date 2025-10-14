@@ -216,38 +216,14 @@ if (initialTabContent) {
     const projectButtons = document.querySelectorAll('.project-button');
     const projectContents = document.querySelectorAll('.project-content');
 
-    // Funcționalitate fullscreen
-function toggleFullscreen() {
-    const carouselWrapper = document.querySelector('.carousel-wrapper');
-    const carouselOverlay = document.querySelector('.carousel-overlay');
-        
-    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) {
-        // Entering fullscreen
-        if (carouselWrapper.requestFullscreen) {
-            carouselWrapper.requestFullscreen();
-        } else if (carouselWrapper.webkitRequestFullscreen) {
-            carouselWrapper.webkitRequestFullscreen();
-        } else if (carouselWrapper.mozRequestFullScreen) {
-            carouselWrapper.mozRequestFullScreen();
+    // Adăugăm eveniment pentru butonul de fullscreen
+const fullscreenBtn = document.querySelector('.fullscreen-btn');
+if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', function() {
+        if (typeof toggleFullscreen === 'function') {
+            toggleFullscreen();
         }
-        // Hide the overlay when entering fullscreen
-        if (carouselOverlay) {
-            carouselOverlay.style.display = 'none';
-        }
-    } else {
-        // Exiting fullscreen
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        }
-        // Show the overlay when exiting fullscreen
-        if (carouselOverlay) {
-            carouselOverlay.style.display = 'block';
-        }
-    }
+    });
 }
 
     // Fullscreen functionality moved to fullscreen.js
@@ -257,12 +233,6 @@ function toggleFullscreen() {
         carouselContainer = document.querySelector('.carousel-container');
         carousel = document.querySelector('.carousel');
         
-        // Adăugăm eveniment pentru butonul de fullscreen
-        const fullscreenBtn = document.querySelector('.fullscreen-btn');
-        if (fullscreenBtn) {
-            fullscreenBtn.addEventListener('click', toggleFullscreen);
-        }
-
         if (!carouselContainer || !carousel) {
             return false;
         }

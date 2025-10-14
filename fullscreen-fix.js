@@ -1,96 +1,100 @@
-// Detectare iOS
+// Înlocuiește funcția isIOS() cu această versiune îmbunătățită
 function isIOS() {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /iPad|iPhone|iPod/.test(userAgent) || 
            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }
 
-// Functie pentru activare fullscreen nativ
+// Funcție pentru a intra în modul fullscreen
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
-        return element.requestFullscreen();
-    } else if (element.webkitRequestFullscreen) {
+        return element.requestFullscreen().catch(console.error);
+    } else if (element.webkitRequestFullscreen) { // Safari/Chrome
         return element.webkitRequestFullscreen();
-    } else if (element.mozRequestFullScreen) {
+    } else if (element.webkitEnterFullscreen) { // iOS Safari
+        return element.webkitEnterFullscreen();
+    } else if (element.webkitEnterFullScreen) { // iOS Safari (altă variantă)
+        return element.webkitEnterFullScreen();
+    } else if (element.mozRequestFullScreen) { // Firefox
         return element.mozRequestFullScreen();
-    } else if (element.msRequestFullscreen) {
+    } else if (element.msRequestFullscreen) { // IE/Edge
         return element.msRequestFullscreen();
     }
     return Promise.reject('Fullscreen API nu este suportat');
 }
 
-// Functie pentru iesire fullscreen nativ
+// Funcție pentru a ieși din modul fullscreen
 function exitFullscreen() {
     if (document.exitFullscreen) {
         return document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari
         return document.webkitExitFullscreen();
-    } else if (document.mozCancelFullScreen) {
+    } else if (document.webkitCancelFullScreen) { // iOS
+        return document.webkitCancelFullScreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
         return document.mozCancelFullScreen();
-    } else if (document.msExitFullscreen) {
+    } else if (document.msExitFullscreen) { // IE/Edge
         return document.msExitFullscreen();
     }
     return Promise.reject('Ieșirea din fullscreen nu este suportată');
 }
 
-// Functie pentru a sti daca suntem in fullscreen
-function isFullscreenActive() {
-    return document.fullscreenElement ||
-           document.webkitFullscreenElement ||
-           document.mozFullScreenElement ||
-           document.msFullscreenElement;
-}
-
-// Functie principala toggle fullscreen
+// Actualizează funcția toggleFullscreen() cu această versiune
 function toggleFullscreen() {
-    const carouselWrapper = document.querySelector('.carousel-wrapper');
-    const carouselOverlay = document.querySelector('.carousel-overlay');
-    const element = carouselWrapper || document.documentElement;
-
+    const element = document.documentElement;
+    
     if (isIOS()) {
-        // Simulare fullscreen pentru iPhone
-        const isActive = document.body.classList.toggle('ios-fullscreen');
-        element.classList.toggle('ios-fullscreen', isActive);
-        if (carouselOverlay) {
-            carouselOverlay.style.display = isActive ? 'none' : 'block';
-        }
-    } else {
-        // Browsere normale – folosim API-ul nativ
-        if (isFullscreenActive()) {
+        if (document.webkitFullscreenElement || 
+            document.webkitCurrentFullScreenElement || 
+            document.fullscreenElement) {
             exitFullscreen();
         } else {
-            enterFullscreen(element).catch(err => console.warn('Eroare fullscreen:', err));
+            // Pe iOS, încercăm mai întâi cu document.documentElement
+            const requestFullscreen = 
+                element.requestFullscreen || 
+                element.webkitRequestFullscreen || 
+                element.mozRequestFullScreen || 
+                element.msRequestFullscreen;
+            
+            if (requestFullscreen) {
+                requestFullscreen.call(element).catch(err => {
+                    console.log('Eroare la fullscreen:', err);
+                    // Dacă nu funcționează, încercăm cu o abordare alternativă
+                    document.body.classList.add('ios-fullscreen');
+                });
+            } else {
+                // Ultimul recurs - adăugăm clasa manual
+                document.body.classList.add('ios-fullscreen');
+            }
+        }
+    } else {
+        // Pentru alte browsere
+        if (!document.fullscreenElement) {
+            enterFullscreen(element).catch(console.error);
+        } else {
+            exitFullscreen();
         }
     }
 }
 
-// Detectam schimbarea modului fullscreen
-['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange']
-.forEach(event => {
-    document.addEventListener(event, () => {
-        const carouselOverlay = document.querySelector('.carousel-overlay');
-        const active = isFullscreenActive();
-        if (carouselOverlay) {
-            carouselOverlay.style.display = active ? 'none' : 'block';
+// Adaugă acest stil în head-ul documentului dacă nu există deja
+if (!document.querySelector('#ios-fullscreen-style')) {
+    const style = document.createElement('style');
+    style.id = 'ios-fullscreen-style';
+    style.textContent = `
+        .ios-fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            z-index: 99999 !important;
+            background: white;
+            overflow: auto !important;
+            -webkit-overflow-scrolling: touch !important;
         }
-    });
-});
-
-// Stiluri pentru simularea fullscreen-ului pe iOS
-const style = document.createElement('style');
-style.textContent = `
-.ios-fullscreen {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
-    z-index: 9999 !important;
-    background: #000 !important;
-    overflow: hidden !important;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
+    `;
+    document.head.appendChild(style);
 }
-`;
-document.head.appendChild(style);
