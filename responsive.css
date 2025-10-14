@@ -1,100 +1,104 @@
-
 /* Mobile styles (max-width: 767px) */
 @media screen and (max-width: 767px) {
- 
- .site-header {
-  min-height: 8vh;
-  background-color: transparent;
-  position: relative;
-  display: flex;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+
+.site-header {
+    width: 100%;
+    height: 8vh;
+    background-color: transparent;
+    color: black;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 10;
 }
 
-.header-content {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 10px;
-  gap: 10px;
-}
-
-.logo {
-  height: 40px;
-  width: auto;
-  max-width: 200px;
-}
-
-
-.header-right {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 10px;
-}
-
-.header-buttons {
-  height: 100%;
-  display: flex;
-  align-items: stretch; /* Important pentru a întinde copiii */
-}
-  
-  .btn {
-    padding: auto; /* Reducem padding-ul orizontal pe mobil */
+  .header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    gap: 10px;
   }
 
-   .site-header {
-        min-height: 60px; /* sau orice înălțime doriți pentru mobil */
-    }
-    
-    .header-content {
-        align-items: stretch;
-        padding: 5px 10px;
-    }
-    
-    .header-right {
-        align-items: stretch;
-    }
-    
-    .header-buttons {
-        height: 100%;
-    }
-    
-    .devis-btn {
-        padding: 0 12px;
-        font-size: 0.85em;
-    }
+  .logo {
+    height: 5vh;
+    width: auto;
+    max-width: 200px;
+  }
 
- 
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 10px;
+  }
+
+  .header-buttons {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    /* Important pentru a întinde copiii */
+  }
+
+  .btn {
+    padding: auto;
+    /* Reducem padding-ul orizontal pe mobil */
+  }
+
+  .header-content {
+    align-items: stretch;
+    padding: 5px 10px;
+  }
+
+  .header-right {
+    align-items: stretch;
+  }
+
+  .header-buttons {
+    height: 100%;
+  }
+
+  .devis-btn {
+    padding: 0 12px;
+    font-size: 0.85em;
+  }
+
+
   .bottom-small {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Aliniere la începutul containerului */
-  align-items: center; /* Centrare orizontală */
-  height: 100%; /* Asigură înălțimea completă */
-  width: 100%; /* Lățime completă */
-  padding: 15px 15px 50px 15px; /* Spațiu interior */
-  box-sizing: border-box; /* Include padding-ul în dimensiunea totală */
-  overflow-y: auto; /* Permite scroll dacă conținutul depășește înălțimea */
-  gap: 0px;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Aliniere la începutul containerului */
+    align-items: center;
+    /* Centrare orizontală */
+    height: 100%;
+    /* Asigură înălțimea completă */
+    width: 100%;
+    /* Lățime completă */
+    padding: 15px 15px 50px 15px;
+    /* Spațiu interior */
+    box-sizing: border-box;
+    /* Include padding-ul în dimensiunea totală */
+    overflow-y: auto;
+    /* Permite scroll dacă conținutul depășește înălțimea */
+    gap: 0px;
+  }
 
-/* Carousel Overlay */
-.carousel-overlay {
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  text-align: left;
-  color: rgb(255, 255, 255);
-  z-index: 5;
-  background-color: transparent;
-  padding: 2rem;
-  max-width: 100%;
-}
+  /* Carousel Overlay */
+  .carousel-overlay {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    z-index: 5;
+    background-color: transparent;
+    padding: 2rem;
+    max-width: 100%;
+  }
 
-.carousel-overlay h1 {
+  .carousel-overlay h1 {
     font-size: 2em;
     width: 100%;
     height: 100%;
@@ -104,22 +108,22 @@
     text-align: left;
     box-sizing: border-box;
     word-break: break-word;
-} 
-  
+  }
+
   .carousel-overlay p {
     white-space: normal;
   }
-  
+
   .carousel-overlay p br {
     display: none;
   }
 
 
   .social-links {
-  display: none;
-  justify-content: center;
-  margin: 10px 0;
-} 
+    display: none;
+    justify-content: center;
+    margin: 10px 0;
+  }
 
 
   .modal {
@@ -149,7 +153,8 @@
     z-index: 1001;
   }
 
-  #devisForm, #contactForm {
+  #devisForm,
+  #contactForm {
     padding-bottom: 20px;
   }
 
@@ -161,13 +166,14 @@
     padding: 0;
   }
 
-  .left-large {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 86vh;
-    border-radius: 0;
-    box-shadow: none;
-  }
+.left-large {
+  width: 100% !important;
+  height: 85vh !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
   .right-small {
     width: 100% !important;
@@ -279,7 +285,7 @@
   }
 
 
-  
+
 
   .tab-content,
   .collaborator-content,
@@ -308,7 +314,7 @@
     margin-right: -50vw;
   }
 
-  .tab-content.fade-in-up > * {
+  .tab-content.fade-in-up>* {
     max-width: 100%;
     box-sizing: border-box;
   }
@@ -396,19 +402,17 @@
   }
 
   .mobile-footer {
+    height: 7vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vh;
-    min-height: 50px;
     background-color: #f8f9fa;
-    border-top: 1px solid #e9ecef;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   }
 
   body {
@@ -450,17 +454,14 @@
   body {
     padding-bottom: 100px;
   }
-
-  /* Show mobile footer only on mobile */
-  .mobile-footer {
-    display: flex;
-  }
 }
 
 
-.bottom-small > * {
-  width: 100%; /* Toate elementele copil ocupă toată lățimea */
-  margin: 5px 0; /* Spațiu vertical între elemente */
+.bottom-small>* {
+  width: 100%;
+  /* Toate elementele copil ocupă toată lățimea */
+  margin: 5px 0;
+  /* Spațiu vertical între elemente */
   box-sizing: border-box;
 }
 

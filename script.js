@@ -23,29 +23,36 @@ if (document.readyState === 'loading') {
     preloadImages();
 }
 
-// Funcție simplă pentru a forța scroll-ul în sus
+// Detectare dispozitiv mobil
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+// Funcție pentru a forța scroll-ul în sus
 function scrollToTop() {
-    // Folosim requestAnimationFrame pentru o mai bună performanță
-    const scrollToTop = window.setInterval(function() {
-        const pos = window.pageYOffset;
-        if (pos > 0) {
-            window.scrollTo(0, pos - 20);
-        } else {
-            window.clearInterval(scrollToTop);
-        }
-    }, 10);
+    // Încearcă mai multe metode pentru a asigura funcționarea pe toate dispozitivele
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0; // Pentru Safari
+    document.documentElement.scrollTop = 0; // Pentru Chrome, Firefox, IE și Opera
+    
+    // Pe iOS, uneori este nevoie de un mic delay
+    if (isMobile) {
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }, 100);
+    }
 }
 
 // Asigură-te că pagina se reîncarcă mereu de la început
-window.addEventListener('beforeunload', function() {
-    window.scrollTo(0, 0);
-});
+window.addEventListener('beforeunload', scrollToTop);
+window.addEventListener('pagehide', scrollToTop);
 
-// Pe iOS, adăugăm un eveniment suplimentar
-if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-    window.addEventListener('pagehide', function() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+// Pe iOS, adăugăm un eveniment suplimentar pentru schimbarea hash-ului
+if (isMobile) {
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            scrollToTop();
+        }
     });
 }
 
@@ -55,12 +62,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (initialTabContent) {
         initialTabContent.classList.add('fade-in-up');
     }
-    
     // Preload images (in case DOMContentLoaded fires before all images are found)
     preloadImages();
     
     // Asigură-te că pagina începe de sus la încărcare
-    window.scrollTo(0, 0);
+    scrollToTop();
+    
+    // Pe mobil, adăugăm un mic delay suplimentar pentru a contracara orice ajustare de către browser
+    if (isMobile) {
+        setTimeout(scrollToTop, 300);
+    }
     // Funcționalitate de căutare
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.querySelector('.search-btn');
@@ -734,21 +745,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Event listeners
-    if (prevButton) {
-        prevButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            prevSlide();
-            stopSlideShow(); // Oprim slideshow-ul după navigare manuală
-        });
-    }
+    prevButton.addEventListener('click', () => {
+        prevSlide();
+        startSlideShow(); // Restart the slideshow after manual navigation
+    });
 
-    if (nextButton) {
-        nextButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            nextSlide();
-            stopSlideShow(); // Oprim slideshow-ul după navigare manuală
-        });
-    }
+    nextButton.addEventListener('click', () => {
+        nextSlide();
+        startSlideShow(); // Restart the slideshow after manual navigation
+    });
 
     // Pause on hover
     if (carousel) {
