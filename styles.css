@@ -172,8 +172,6 @@ button,
 .right-small {
   position: relative;
   overflow: hidden;
-  min-width: 100px;
-  min-height: 100px;
 }
 
 
@@ -480,13 +478,11 @@ textarea:invalid+.error-message {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto ;
   background-color: transparent;
   overflow: hidden;
-  /* Previne ieșirea conținutului în afara containerului */
   z-index: 1;
   position: relative;
-  /* Asigură poziționarea corectă a elementelor absolute */
 }
 
 .carousel {
@@ -664,14 +660,6 @@ textarea:invalid+.error-message {
   }
 }
 
-/* Stilizare container principal */
-.left-large {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 0;
-  /* Asigură că flexbox-ul se comportă corect */
-}
 
 /* Container pentru conținutul paginii */
 .carousel-wrapper {
@@ -1352,7 +1340,7 @@ img {
 /* Stilizare container stânga mare */
 .left-large {
   width: var(--golden-ratio);
-  height: 100%;
+  height: auto;
   background-color: var(--color-primary);
   color: var(--text-light);
   padding: 0;
