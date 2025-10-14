@@ -516,6 +516,7 @@ textarea:invalid+.error-message {
 
 .carousel-overlay h1 {
   font-size: 5rem;
+  text-transform: uppercase;
   margin-bottom: 1rem;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -1019,6 +1020,7 @@ img {
   justify-content: center;
   white-space: nowrap;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 /* Stil pentru butonul de devis - starea normala */

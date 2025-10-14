@@ -68,7 +68,7 @@
                 Număr RCS: 853 760 346 R.C.S. Pontoise
               </p>
             </div>
-            
+
             <form id="contactForm" class="contact-form">
               <h3>Envoyez-nous un message</h3>
               <div class="form-group required">
@@ -930,7 +930,7 @@
 
   <!-- Script-uri cu defer pentru a nu bloca randarea paginii -->
   <script src="script.js" defer></script>
-  <script src="fullscreen.js" defer></script>
+  <script src="fullscreen-fix.js"></script>
   <script src="js/contact-modal.js" defer></script>
   <script src="js/devis-modal.js" defer></script>
   <script src="js/resizer.js" defer></script>
@@ -941,7 +941,7 @@
 
   <!-- Script pentru functionalitatea footer-ului mobil -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const mobileEmailLink = document.getElementById('mobileEmailLink');
       const openContactModal = () => {
         const modal = document.getElementById('contactModal');
@@ -955,7 +955,7 @@
       };
 
       if (mobileEmailLink) {
-        mobileEmailLink.addEventListener('click', function(e) {
+        mobileEmailLink.addEventListener('click', function (e) {
           e.preventDefault();
           openContactModal();
         });
@@ -990,7 +990,6 @@
       }
     }
   </style>
-  <script src="fullscreen-fix.js"></script>
 </body>
 
 </html>

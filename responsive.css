@@ -1,4 +1,8 @@
-.site-header {
+
+/* Mobile styles (max-width: 767px) */
+@media screen and (max-width: 767px) {
+ 
+ .site-header {
   min-height: 8vh;
   background-color: transparent;
   position: relative;
@@ -14,6 +18,7 @@
   align-items: center;
   width: 100%;
   padding: 10px;
+  gap: 10px;
 }
 
 .logo {
@@ -31,15 +36,38 @@
 }
 
 .header-buttons {
+  height: 100%;
   display: flex;
-  margin: 0;
-  width: auto;
+  align-items: stretch; /* Important pentru a întinde copiii */
 }
+  
+  .btn {
+    padding: auto; /* Reducem padding-ul orizontal pe mobil */
+  }
 
+   .site-header {
+        min-height: 60px; /* sau orice înălțime doriți pentru mobil */
+    }
+    
+    .header-content {
+        align-items: stretch;
+        padding: 5px 10px;
+    }
+    
+    .header-right {
+        align-items: stretch;
+    }
+    
+    .header-buttons {
+        height: 100%;
+    }
+    
+    .devis-btn {
+        padding: 0 12px;
+        font-size: 0.85em;
+    }
 
-/* Mobile styles (max-width: 767px) */
-@media screen and (max-width: 767px) {
-
+ 
   .bottom-small {
   display: flex;
   flex-direction: column;
@@ -53,17 +81,46 @@
   gap: 0px;
 }
 
+/* Carousel Overlay */
+.carousel-overlay {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  z-index: 5;
+  background-color: transparent;
+  padding: 2rem;
+  max-width: 100%;
+}
+
+.carousel-overlay h1 {
+    font-size: 2.5em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    box-sizing: border-box;
+    word-break: break-word;
+} 
+  
+  .carousel-overlay p {
+    white-space: normal;
+  }
+  
+  .carousel-overlay p br {
+    display: none;
+  }
+
+
   .social-links {
   display: none;
   justify-content: center;
   margin: 10px 0;
 } 
 
-.devis-btn {
-  padding: 6px 12px;
-  font-size: 0.85em;
-  white-space: nowrap;
-}
 
   .modal {
     width: 100% !important;
@@ -250,10 +307,6 @@
     box-sizing: border-box;
   }
 
-  .btn {
-    width: 100%;
-    margin: 5px 0;
-  }
 
   .carousel-wrapper {
     position: absolute;
@@ -325,18 +378,6 @@
   .footer-content {
     flex-direction: column;
     gap: 15px;
-  }
-
-  .carousel-overlay h1 {
-    font-size: 3em;
-  }
-  
-  .carousel-overlay p {
-    white-space: normal;
-  }
-  
-  .carousel-overlay p br {
-    display: none;
   }
 
   .mobile-footer {
