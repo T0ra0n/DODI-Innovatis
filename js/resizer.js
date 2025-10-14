@@ -1,4 +1,16 @@
+// Funcție pentru a detecta dacă suntem pe un dispozitiv mobil
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+         (window.innerWidth <= 1024);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Verificăm dacă suntem pe un dispozitiv mobil
+  if (isMobileDevice()) {
+    // Pe dispozitive mobile, nu activăm funcționalitatea de redimensionare
+    return;
+  }
+
   // Initialize vertical resizer (between left and right panels)
   const verticalResizer = document.getElementById('verticalResizer');
   const leftPanel = document.getElementById('leftPanel');
@@ -31,6 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (horizontalResizer && topPanel && bottomPanel) {
     horizontalResizer.addEventListener('mousedown', initResize, false);
   }
+  
+  // Set initial sizes when the page loads
+  window.addEventListener('load', setInitialSizes);
+  window.addEventListener('resize', setInitialSizes);
 
   function initResize(e) {
     e.preventDefault();

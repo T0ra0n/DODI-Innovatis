@@ -69,19 +69,12 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* Aliniere la începutul containerului */
     align-items: center;
-    /* Centrare orizontală */
-    height: 100%;
-    /* Asigură înălțimea completă */
+    height: 100svh;
     width: 100%;
-    /* Lățime completă */
     padding: 15px 15px 50px 15px;
-    /* Spațiu interior */
     box-sizing: border-box;
-    /* Include padding-ul în dimensiunea totală */
     overflow-y: auto;
-    /* Permite scroll dacă conținutul depășește înălțimea */
     gap: 0px;
   }
 
@@ -188,6 +181,7 @@
     border-radius: 0;
     padding: 0;
     margin: 0;
+    height: 100svh;
   }
 
   .project-button {
@@ -204,6 +198,7 @@
 
   .tabs-container,
   .section-tabs {
+    height: 10svh;
     display: flex;
     width: 100%;
     flex-wrap: nowrap;
@@ -211,7 +206,6 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 1px;
-    padding: 10px;
   }
 
   .tabs-container .tab-button,
@@ -226,6 +220,14 @@
     word-break: break-word;
     margin: 0;
   }
+
+  .tabs-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 5px;
+}
 
   .tabs-container::-webkit-scrollbar,
   .section-tabs::-webkit-scrollbar {
@@ -284,8 +286,19 @@
     text-overflow: ellipsis;
   }
 
+.left-small {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  height: 50svh;
+}
 
-
+.right-large {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  height: 50svh;
+}
 
   .tab-content,
   .collaborator-content,
