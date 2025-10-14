@@ -1982,6 +1982,80 @@ img {
   border-radius: var(--border-radius);
 }
 
+/* Stiluri pentru punctele de navigare fullscreen */
+.carousel-dots-fullscreen {
+    display: none; /* Ascunde implicit, va fi afișat doar în modul fullscreen */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    z-index: 2147483647;
+    padding: 15px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    height: 60px; /* Înălțime fixă pentru a asigura vizibilitatea */
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+body.carousel-fullscreen-active .carousel-dots-fullscreen,
+.carousel-fullscreen .carousel-dots-fullscreen {
+    display: flex;
+    opacity: 1;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Asigură-te că punctele sunt vizibile peste imaginile din carusel */
+body.carousel-fullscreen-active .carousel-dots-fullscreen {
+    z-index: 2147483647;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Asigură-te că punctele sunt vizibile peste imaginile din carusel */
+.carousel-dots-fullscreen .carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 8px;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.carousel-dots-fullscreen .carousel-dot:hover,
+.carousel-dots-fullscreen .carousel-dot.active {
+    background-color: #fff;
+    transform: scale(1.3);
+}
+
+.carousel-dots-fullscreen .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.carousel-dots-fullscreen .carousel-dot:hover,
+.carousel-dots-fullscreen .carousel-dot.active {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+
+/* Ajustări pentru carusel în modul fullscreen */
 .carousel-wrapper {
   position: relative;
   width: 100%;

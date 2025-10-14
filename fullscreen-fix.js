@@ -357,17 +357,49 @@ if (!document.querySelector('#carousel-fullscreen-style')) {
 
         .carousel-fullscreen .carousel {
             width: 100% !important;
-            height: 100% !important;
+            height: calc(100% - 60px) !important; /* Reducem înălțimea pentru a face loc pentru dots */
             position: relative !important;
         }
 
         .carousel-fullscreen .carousel-slide {
             width: 100vw !important;
-            height: 100vh !important;
+            height: calc(100vh - 60px) !important; /* Ajustăm înălțimea pentru a face loc pentru dots */
             object-fit: contain !important;
             position: absolute !important;
             top: 0 !important;
             left: 0 !important;
+        }
+
+        /* Stiluri pentru dots în modul fullscreen */
+        .carousel-fullscreen .carousel-dots-fullscreen {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            display: flex !important;
+            justify-content: center !important;
+            z-index: 2147483648 !important;
+            padding: 15px 0 !important;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            backdrop-filter: blur(5px) !important;
+        }
+
+        .carousel-fullscreen .carousel-dots-fullscreen .carousel-dot {
+            width: 10px !important;
+            height: 10px !important;
+            border-radius: 50% !important;
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            margin: 0 6px !important;
+            cursor: pointer !important;
+            border: 2px solid transparent !important;
+            padding: 0 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .carousel-fullscreen .carousel-dots-fullscreen .carousel-dot:hover,
+        .carousel-fullscreen .carousel-dots-fullscreen .carousel-dot.active {
+            background-color: #fff !important;
+            transform: scale(1.2);
         }
 
         body.carousel-fullscreen-active {
@@ -395,7 +427,8 @@ if (!document.querySelector('#carousel-fullscreen-style')) {
                 top: -9999px !important;
                 z-index: -1 !important;
             }
-        }
+
+                  }
     `;
     document.head.appendChild(style);
 }

@@ -276,8 +276,9 @@ if (initialTabContent) {
         const project = document.querySelector(`.project[data-id="${projectNumber}"]`);
         const projectInfoContainer = document.querySelector('.project-info-container');
         const dotsContainer = document.querySelector('.carousel-dots');
+        const fullscreenDotsContainer = document.querySelector('.carousel-dots-fullscreen');
 
-        if (!project || !carouselContainer || !projectInfoContainer || !dotsContainer) {
+        if (!project || !carouselContainer || !projectInfoContainer || !dotsContainer || !fullscreenDotsContainer) {
             return;
         }
         // Actualizăm butonul activ
@@ -358,15 +359,21 @@ if (initialTabContent) {
             return;
         }
         
-        // Creăm bulinele pentru fiecare imagine
-        dotsContainer.innerHTML = '';
-        for (let i = 0; i < totalImages; i++) {
-            const dot = document.createElement('button');
-            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-            dot.setAttribute('data-index', i);
-            dot.setAttribute('aria-label', `Slide ${i + 1}`);
-            dotsContainer.appendChild(dot);
-        }
+        // Creăm bulinele pentru fiecare imagine în ambele containere
+        const createDots = (container) => {
+            container.innerHTML = '';
+            for (let i = 0; i < totalImages; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('data-index', i);
+                dot.setAttribute('aria-label', `Slide ${i + 1}`);
+                dot.addEventListener('click', () => showSlide(i));
+                container.appendChild(dot);
+            }
+        };
+        
+        createDots(dotsContainer);
+        createDots(fullscreenDotsContainer);
     }
     let touchStartX = 0;
     let touchEndX = 0;
@@ -628,11 +635,20 @@ if (initialTabContent) {
         startSlideShow();
     }
 
-    // Actualizează starea bulinelor
+    // Actualizează starea bulinelor pentru ambele containere
     function updateDots() {
-        const dots = document.querySelectorAll('.carousel-dot');
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentProjectSlide);
+        const dotsContainers = [
+            document.querySelector('.carousel-dots'),
+            document.querySelector('.carousel-dots-fullscreen')
+        ];
+        
+        dotsContainers.forEach(container => {
+            if (container) {
+                const dots = container.querySelectorAll('.carousel-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentProjectSlide);
+                });
+            }
         });
     }
 
