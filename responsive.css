@@ -95,7 +95,7 @@
 }
 
 .carousel-overlay h1 {
-    font-size: 2.5em;
+    font-size: 2em;
     width: 100%;
     height: 100%;
     display: flex;
@@ -184,6 +184,48 @@
     margin: 0;
   }
 
+  .project-button {
+    font-size: 0.6em;
+    padding: 8px 4px;
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.2;
+  }
+
+  .tabs-container,
+  .section-tabs {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 1px;
+    padding: 10px;
+  }
+
+  .tabs-container .tab-button,
+  .section-tabs .section-tab {
+    font-size: 0.7em !important;
+    padding: 8px 4px !important;
+    line-height: 1.2;
+    flex: 1 0 auto;
+    min-width: 0;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+    margin: 0;
+  }
+
+  .tabs-container::-webkit-scrollbar,
+  .section-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
   .resizer,
   .carousel-button.next,
   .carousel-button.prev {
@@ -236,36 +278,8 @@
     text-overflow: ellipsis;
   }
 
-  .tabs-container,
-  .section-tabs {
-    width: 100%;
-    max-width: 100vw;
-    margin: 0;
-    padding: 20px 5px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    display: flex;
-    gap: 1px;
-  }
 
-  .tabs-container::-webkit-scrollbar,
-  .section-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .tab-button,
-  .section-tab {
-    padding: 8px 15px;
-    font-size: 0.8em;
-    white-space: nowrap;
-    flex: 0 0 auto;
-    margin: 0 1px;
-    min-width: max-content;
-    text-align: center;
-  }
+  
 
   .tab-content,
   .collaborator-content,
