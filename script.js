@@ -216,16 +216,6 @@ if (initialTabContent) {
     const projectButtons = document.querySelectorAll('.project-button');
     const projectContents = document.querySelectorAll('.project-content');
 
-    // Adăugăm eveniment pentru butonul de fullscreen
-const fullscreenBtn = document.querySelector('.fullscreen-btn');
-if (fullscreenBtn) {
-    fullscreenBtn.addEventListener('click', function() {
-        if (typeof toggleFullscreen === 'function') {
-            toggleFullscreen();
-        }
-    });
-}
-
     // Fullscreen functionality moved to fullscreen.js
 
     // Inițializare elemente
